@@ -104,5 +104,31 @@ namespace ToDoList.Controllers
                 else return NotFound(state.Errors);
             }
         }
+        [HttpPost("/Registration")]
+        public async Task<IActionResult> RegisterAsync([FromBody] UserRegistrationDto userRegisterDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _accountRepo.RegisterAsync(userRegisterDto);
+
+            if (!result.IsAuthenticated)
+                return BadRequest(result.Message);
+            return Ok(result);
+        }
+        [HttpPost("/Login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _accountRepo.GetToken(loginDto);
+
+            if (!result.IsAuthenticated)
+                return BadRequest(result.Message);
+
+            return Ok(result);
+        }
+
     }
 }

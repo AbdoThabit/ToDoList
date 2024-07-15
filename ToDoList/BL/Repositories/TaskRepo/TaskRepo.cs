@@ -15,7 +15,7 @@ namespace ToDoList.BL.Repositories.TaskRepo
             _context = context;
             _userManager = userManager;
         }
-        public async Task<int> Add(TaskDto dto)
+        public async Task<int> Add(string userId ,TaskDto dto)
         {
             JobTask jobTask = new JobTask()
             {
@@ -23,7 +23,7 @@ namespace ToDoList.BL.Repositories.TaskRepo
                 Description = dto.Description,
                 Type = dto.Type,
                 date = dto.Created,
-                UserId = dto.UserID,
+                UserId = userId,
             };
             await _context.Tasks.AddAsync(jobTask);
             var result = await _context.SaveChangesAsync();
