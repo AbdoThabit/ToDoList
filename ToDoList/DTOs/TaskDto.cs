@@ -8,6 +8,6 @@
         public string Type { get; set; }
 
         public DateTime Created { get; set; }
-        public String UserID { get; set; }
+        
     }
 }

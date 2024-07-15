@@ -12,6 +12,8 @@ namespace ToDoList.BL.Repositories.AccountRepo
         public Task<IdentityResult> edit(UserInfo userInfo, String Id);
         public Task<IdentityResult> delete(String id);
         public Task<IdentityResult> changePassword(ChanagePasswordDto password);
+        public Task<AuthModel> RegisterAsync(UserRegistrationDto userRegistrationDto);
+        public Task<AuthModel> GetToken(LoginDto loginDto);
 
     }
 }
